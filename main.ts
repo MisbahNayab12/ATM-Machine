@@ -33,23 +33,49 @@
     let amountAns = await inquirer.prompt(
       [
         {
-          type: "number",
+          type: "list",
           name: "amount",
-          message: "enter your amount",
+          message: "Please select options",
+          choices: ["2000", "4000", "6000", "8000", "10000", "other"]
         }
       ]
     );
 
-    if (amountAns.amount>myBalance){
-      console.log("Insufficient Balance")
-    } else{
-      myBalance -= amountAns.amount;
-    console.log(`Your remaining balance is: ${myBalance}`)
+    if (amountAns.amount == "other"){
+      let enterAmount = await inquirer.prompt(
+        [
+          {
+            name: "newAmount",
+            type: "number",
+            message: "Please enter amount",
+          }
+        ]
+      )
+      if (enterAmount.newAmount < myBalance){
+        console.log(`Your remaining balance is ${myBalance - enterAmount.newAmount}`)
+      } 
+      else {
+        console.log("You have insufficient balance.")
+      }
+    } 
+    else if (amountAns.amount == "2000"){
+      console.log(`Your remaining balance is ${myBalance - amountAns.amount}`)
+    }
+    else if (amountAns.amount == "4000"){
+      console.log(`Your remaining balance is ${myBalance - amountAns.amount}`)
+    }
+    else if (amountAns.amount == "6000"){
+      console.log(`Your remaining balance is ${myBalance - amountAns.amount}`)
+    }
+    else if (amountAns.amount == "8000"){
+      console.log(`Your remaining balance is ${myBalance - amountAns.amount}`)
+    }
+    else {
+      console.log(`Your remaining balance is ${myBalance - amountAns.amount}`)
     }
   }
-
-  else if (operation.options === "check balance"){
-    console.log(`Your current balance is: ${myBalance}`)
+  else {
+    console.log(`Your current balance is ${myBalance}`)
   }
  }
  else {
